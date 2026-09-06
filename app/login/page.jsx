@@ -2,15 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import Link from "next/link"; // 👈 importar
 
 export default function Login() {
+
   const [form, setForm] = useState({
     correo: "",
     clave: "",
   });
 
-  const [mostrarClave, setMostrarClave] = useState(false); // 👈 nuevo
-
+  const [mostrarClave, setMostrarClave] = useState(false);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -36,15 +37,12 @@ export default function Login() {
       return;
     }
 
-    // ✅ GUARDAR TODO
     localStorage.setItem("token", data.token);
     localStorage.setItem("user", JSON.stringify(data.user));
 
-    // 🔥 Notifica a otros componentes (ej: Navbar)
     window.dispatchEvent(new Event("storage"));
 
     alert("Login OK");
-
     router.push("/dashboard");
   };
 
@@ -64,7 +62,6 @@ export default function Login() {
           }
         />
 
-        {/* 🔐 Input con botón */}
         <div className="relative">
           <input
             type={mostrarClave ? "text" : "password"}
@@ -87,6 +84,14 @@ export default function Login() {
         <button className="w-full bg-blue-600 hover:bg-blue-700 p-3 rounded-lg">
           Ingresar
         </button>
+
+        <p className="text-sm text-center text-slate-400">
+          ¿No tienes cuenta?{" "}
+          <Link href="/register" className="text-blue-400 hover:underline">
+            Créala aquí
+          </Link>
+        </p>
+
       </form>
     </div>
   );

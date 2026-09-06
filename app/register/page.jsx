@@ -1,8 +1,10 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link"; // 👈 IMPORTANTE
 
 export default function Register() {
+
   const [form, setForm] = useState({
     nombre: "",
     correo: "",
@@ -69,7 +71,6 @@ export default function Register() {
           onChange={(e) => setForm({ ...form, correo: e.target.value })}
         />
 
-        {/* 🔐 Input con botón */}
         <div className="relative">
           <input
             type={mostrarClave ? "text" : "password"}
@@ -90,6 +91,14 @@ export default function Register() {
         <button className="w-full bg-blue-600 hover:bg-blue-700 transition p-3 rounded-lg font-medium">
           Registrar
         </button>
+
+        <p className="text-sm text-center text-slate-400">
+          ¿Ya tienes una cuenta?{" "}
+          <Link href="/login" className="text-blue-400 hover:underline">
+            Ingresa aquí
+          </Link>
+        </p>
+
       </form>
     </div>
   );

@@ -26,7 +26,7 @@ export default function Navbar() {
 
   return (
     <nav className="bg-zinc-900 border-b border-zinc-800 px-6 py-3 flex justify-between items-center">
-      <h1 className="text-white font-semibold text-lg">Evaluación N2</h1>
+      <Link href="/" className="text-white font-semibold text-lg">Tech Solutions EVA3</Link>
 
       <div className="flex gap-4 items-center text-sm">
         <Link href="/register" className="text-zinc-300 hover:text-white">

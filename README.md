@@ -197,6 +197,217 @@ Aplicación funcional y lista para su uso.
 
 ---
 
+
+## DESARROLLO EVALUACIÓN 3
+ # 1. Crear request de LOGIN
+
+* Método: `POST`
+* URL:
+
+```
+http://localhost:3000/api/auth/login
+```
+
+* Body → JSON:
+
+```
+{
+  "correo": "tu@email.com",
+  "clave": "tu_password"
+}
+```
+
+Enviar la request.
+
+Copiar el `"token"` que devuelve.
+
+![alt text](image.png)
+
+---
+
+## 2. Crear variable de entorno
+
+En Insomnia:
+
+* Environment → Manage Environments
+* Agregar:
+
+```
+{
+  "token": "PEGA_AQUI_EL_TOKEN"
+}
+```
+
+---
+
+## 3. Requests de prueba
+
+---
+
+## POST → debe devolver 201
+
+* Método: `POST`
+* URL:
+
+```
+http://localhost:3000/api/projects
+```
+
+* Headers:
+
+```
+Authorization: Bearer {{ token }}
+Content-Type: application/json
+```
+
+* Body:
+
+```
+{
+  "nombre": "Proyecto Test",
+  "fechaInicio": "2024-01-01",
+  "estado": "activo",
+  "responsable": "Diego",
+  "monto": 1000
+}
+```
+
+Resultado esperado:
+
+* Status: 201
+
+![alt text](image-1.png)
+---
+
+## POST inválido → debe dar 400
+
+Body incorrecto:
+
+```
+{
+  "nombre": ""
+}
+```
+
+Resultado esperado:
+
+* 400
+* mensaje de error
+
+![alt text](image-2.png)
+---
+
+## GET → debe devolver 200
+
+* Método: `GET`
+* URL:
+
+```
+http://localhost:3000/api/projects
+```
+
+Resultado esperado:
+
+* 200
+* lista `[]` o con datos
+
+![alt text](image-3.png)
+---
+
+## GET by ID → 200 o 404
+
+* Método: `GET`
+
+```
+http://localhost:3000/api/projects/15
+```
+
+Si existe:
+
+* 200
+
+![alt text](image-4.png)
+
+Si no existe:
+
+* 404
+
+![alt text](image-5.png)
+
+---
+
+## PUT → 200 o 404
+
+* Método: `PUT`
+
+```
+http://localhost:3000/api/projects/5
+```
+
+* Body:
+
+```
+{
+  "nombre": "Proyecto Editado",
+  "fechaInicio": "2024-01-01",
+  "estado": "finalizado",
+  "responsable": "Diego",
+  "monto": 2000
+}
+```
+
+Resultado esperado:
+
+* 200
+
+![alt text](image-6.png)
+
+---
+
+## DELETE → debe devolver 204
+
+* Método: `DELETE`
+
+```
+http://localhost:3000/api/projects/1
+```
+
+Resultado esperado:
+
+* 204
+* Body vacío
+
+En Insomnia se verá:
+
+```
+No Content
+```
+
+![alt text](image-7.png)
+
+---
+
+## Dashboard de Proyectos
+
+En el dashboard de proyectos se implementaron las siguientes funcionalidades y validaciones:
+
+- **Validación de estado del proyecto**:  
+  Solo se permite seleccionar uno de los siguientes estados:
+  - Activo  
+  - Rechazado  
+  - En Desarrollo  
+
+- **Validación de monto**:  
+  El campo monto acepta únicamente valores numéricos.
+
+- **Gestión de proyectos**:  
+  - Se pueden **editar** y **eliminar** proyectos.  
+  - Antes de realizar estas acciones, se muestra una confirmación para validar si el usuario desea continuar.
+
+- **Visualización de detalles**:  
+  Cada proyecto cuenta con un botón **"Ver"**, el cual despliega una tarjeta con la información detallada del proyecto.
+  
+
 ## 🤖 Uso de Inteligencia Artificial
 
 Durante el desarrollo de esta evaluación se utilizó **Inteligencia Artificial** como herramienta de apoyo para acelerar el proceso de construcción del sistema. Su uso se enfocó en:
